@@ -4,6 +4,8 @@ return {
 
 	["nvim-lua/plenary.nvim"] = { module = "plenary" },
 
+  ["MunifTanjim/nui.nvim"] = { module = "nui" },
+
 	["wbthomason/packer.nvim"] = {
 		cmd = { "PackerSync" },
   	config = function() require "plugins" end,
