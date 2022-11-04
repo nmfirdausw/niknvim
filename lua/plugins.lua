@@ -7,4 +7,9 @@ return {
 		config = function() require "plugins" end,
 	},
 
+	['rebelot/kanagawa.nvim'] = {
+    as = 'kanagawa',
+    config = function() require "configs.kanagawa" end,
+  },
+
 }
