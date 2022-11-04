@@ -16,4 +16,8 @@ return {
     config = function() require "configs.kanagawa" end,
   },
 
+  ["kyazdani42/nvim-web-devicons"] = {
+		module = "nvim-web-devicons",
+		config = function() require "configs.web-devicons" end,
+	},
 }
