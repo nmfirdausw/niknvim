@@ -28,4 +28,10 @@ return {
 		setup = function() vim.g.neo_tree_remove_legacy_commands = true end,
 		config = function() require "configs.neo-tree" end,
   },
+
+  ["nvim-telescope/telescope.nvim"] = {
+    cmd = "Telescope",
+    module = "telescope",
+    config = function() require "configs.telescope" end,
+  },
 }
