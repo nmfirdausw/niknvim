@@ -29,6 +29,17 @@ return {
 		config = function() require "configs.neo-tree" end,
   },
 
+  ["akinsho/bufferline.nvim"] = {
+    module = "bufferline",
+    event = "UIEnter",
+    config = function() require "configs.bufferline" end,
+  },
+
+  ["famiu/bufdelete.nvim"] = { 
+    module = "bufdelete", 
+    cmd = { "Bdelete", "Bwipeout" } 
+  },
+
   ["nvim-telescope/telescope.nvim"] = {
     cmd = "Telescope",
     module = "telescope",
