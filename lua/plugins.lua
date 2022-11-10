@@ -34,4 +34,10 @@ return {
     module = "telescope",
     config = function() require "configs.telescope" end,
   },
+
+  ["nvim-treesitter/nvim-treesitter"] = {
+    run = function() require("nvim-treesitter.install").update { with_sync = true } end,
+    event = "BufEnter",
+    config = function() require "configs.treesitter" end,
+  },
 }
