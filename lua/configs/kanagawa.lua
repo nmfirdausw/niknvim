@@ -1,6 +1,4 @@
-local kanagawa_exists, kanagawa = pcall(require, "kanagawa")
-if not kanagawa_exists then return end
-kanagawa.setup({
+require("kanagawa").setup({
   undercurl = true,
   commentStyle = { italic = true },
   functionStyle = {},
