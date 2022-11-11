@@ -62,6 +62,11 @@ return {
     config = function() require "configs.indent-blankline" end,
   },
 
+  ["lewis6991/gitsigns.nvim"] = {
+    event = "BufEnter",
+    config = function() require "configs.gitsigns" end,
+  },
+
   ["nvim-treesitter/nvim-treesitter"] = {
     run = function() require("nvim-treesitter.install").update { with_sync = true } end,
     event = "BufEnter",
