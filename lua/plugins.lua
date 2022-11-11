@@ -52,6 +52,16 @@ return {
     config = function() require "configs.toggleterm" end,
   },
 
+  ["Darazaki/indent-o-matic"] = {
+    event = "BufEnter",
+    config = function() require "configs.indent-o-matic" end,
+  },
+
+  ["lukas-reineke/indent-blankline.nvim"] = {
+    event = "BufEnter",
+    config = function() require "configs.indent-blankline" end,
+  },
+
   ["nvim-treesitter/nvim-treesitter"] = {
     run = function() require("nvim-treesitter.install").update { with_sync = true } end,
     event = "BufEnter",
