@@ -7,3 +7,10 @@ set('n', '<leader>te', '<cmd>Neotree toggle<cr>', { desc = 'Toggle File Explorer
 -- Telescope 
 set('n', '<leader>ff', function() require("telescope.builtin").find_files() end, { desc = 'Files' })
 set('n', '<leader>fw', function() require("telescope.builtin").live_grep() end, { desc = 'Words' })
+
+-- Buffer delete
+set('n', '<leader>c', '<cmd>Bdelete<cr>', { desc = "Delete buffer" });
+
+-- Navigate buffers
+set('n', 'L', '<cmd>BufferLineCycleNext<cr>', { desc = 'Next buffer tab' })
+set('n', 'H', '<cmd>BufferLineCyclePrev<cr>', { desc = 'Previous buffer tab' })
