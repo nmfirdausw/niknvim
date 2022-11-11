@@ -19,3 +19,7 @@ set('n', 'H', '<cmd>BufferLineCyclePrev<cr>', { desc = 'Previous buffer tab' })
 set('n', '<leader>tf', '<cmd>ToggleTerm direction=float<cr>', { desc = 'ToggleTerm float' })
 set('n', '<leader>th', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', { desc = 'ToggleTerm horizontal split' })
 set('n', '<leader>tv', '<cmd>ToggleTerm size=40 direction=vertical<cr>', { desc = 'ToggleTerm vertical split' })
+
+-- Comment
+set('n', '<leader>/', function() require('Comment.api').toggle.linewise.current() end, { desc = 'Comment line' })
+set('v', '<leader>/', "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", { desc = 'Comment line' })
