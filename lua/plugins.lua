@@ -46,16 +46,23 @@ return {
     config = function() require "configs.telescope" end,
   },
 
+  ["akinsho/toggleterm.nvim"] = {
+    cmd = "ToggleTerm",
+    module = { "toggleterm", "toggleterm.terminal" },
+    config = function() require "configs.toggleterm" end,
+  },
+
   ["nvim-treesitter/nvim-treesitter"] = {
     run = function() require("nvim-treesitter.install").update { with_sync = true } end,
     event = "BufEnter",
     config = function() require "configs.treesitter" end,
   },
 
-  -- Terminal
-  ["akinsho/toggleterm.nvim"] = {
-    cmd = "ToggleTerm",
-    module = { "toggleterm", "toggleterm.terminal" },
-    config = function() require "configs.toggleterm" end,
+  ["JoosepAlviste/nvim-ts-context-commentstring"] = { after = "nvim-treesitter" },
+
+  ["numToStr/Comment.nvim"] = {
+    module = { "Comment", "Comment.api" },
+    keys = { "gc", "gb" },
+    config = function() require "configs.comment" end,
   },
 }
