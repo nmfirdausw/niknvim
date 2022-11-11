@@ -51,4 +51,11 @@ return {
     event = "BufEnter",
     config = function() require "configs.treesitter" end,
   },
+
+  -- Terminal
+  ["akinsho/toggleterm.nvim"] = {
+    cmd = "ToggleTerm",
+    module = { "toggleterm", "toggleterm.terminal" },
+    config = function() require "configs.toggleterm" end,
+  },
 }
