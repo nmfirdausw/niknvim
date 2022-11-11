@@ -37,4 +37,4 @@ set("n", "<leader>gh", function() require("gitsigns").reset_hunk() end, { desc =
 set("n", "<leader>gr", function() require("gitsigns").reset_buffer() end, { desc = "Reset git buffer" })
 set("n", "<leader>gs", function() require("gitsigns").stage_hunk() end, { desc = "Stage git hunk" })
 set("n", "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, { desc = "Unstage git hunk" })
-set("n", "<leader>gd", function() require("gitsigns").diffthis() end, { desc = "View git diff" })
+set("n", "<leader>gf", function() require("gitsigns").diffthis() end, { desc = "View git diff" })
