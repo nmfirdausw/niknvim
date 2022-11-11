@@ -14,3 +14,8 @@ set('n', '<leader>c', '<cmd>Bdelete<cr>', { desc = "Delete buffer" });
 -- Navigate buffers
 set('n', 'L', '<cmd>BufferLineCycleNext<cr>', { desc = 'Next buffer tab' })
 set('n', 'H', '<cmd>BufferLineCyclePrev<cr>', { desc = 'Previous buffer tab' })
+
+-- Terminal
+set('n', '<leader>tf', '<cmd>ToggleTerm direction=float<cr>', { desc = 'ToggleTerm float' })
+set('n', '<leader>th', '<cmd>ToggleTerm size=10 direction=horizontal<cr>', { desc = 'ToggleTerm horizontal split' })
+set('n', '<leader>tv', '<cmd>ToggleTerm size=40 direction=vertical<cr>', { desc = 'ToggleTerm vertical split' })
