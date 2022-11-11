@@ -46,6 +46,13 @@ return {
     config = function() require "configs.telescope" end,
   },
 
+  ["nvim-telescope/telescope-fzf-native.nvim"] = {
+    after = "telescope.nvim",
+    disable = vim.fn.executable "make" == 0,
+    run = "make",
+    config = function() require("telescope").load_extension "fzf" end,
+  },
+
   ["akinsho/toggleterm.nvim"] = {
     cmd = { "ToggleTerm", "TermExec" },
     module = { "toggleterm", "toggleterm.terminal" },
