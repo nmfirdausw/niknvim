@@ -75,6 +75,10 @@ return {
 
   ["JoosepAlviste/nvim-ts-context-commentstring"] = { after = "nvim-treesitter" },
 
+  ["p00f/nvim-ts-rainbow"] = { after = "nvim-treesitter" },
+
+  ["windwp/nvim-ts-autotag"] = { after = "nvim-treesitter" },
+
   ["numToStr/Comment.nvim"] = {
     module = { "Comment", "Comment.api" },
     keys = { "gc", "gb" },
