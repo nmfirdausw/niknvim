@@ -22,9 +22,19 @@ set("n", "<leader>tv", "<cmd>ToggleTerm size=40 direction=vertical<cr>", { desc 
 set("n", "<leader>tg", "<cmd>TermExec cmd='lazygit'<cr>", { desc = "ToggleTerm lazygit" })
 
 -- Comment
-set("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end, { desc = "Comment line" })
+set("n", "<leader>/", function() require('Comment.api').toggle.linewise.current() end, { desc = "Comment line" })
 set("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", { desc = "Comment line" })
 
 -- Stay in indent mode
-set('v', '<', '<gv', { desc = 'Indent line' })
-set('v', '>', '>gv', { desc = 'Unindent line' })
+set("v", "<", "<gv", { desc = "Indent line" })
+set("v", ">", ">gv", { desc = "Unindent line" })
+
+set("n", "<leader>gj", function() require("gitsigns").next_hunk() end, { desc = "Next git hunk" })
+set("n", "<leader>gk", function() require("gitsigns").prev_hunk() end, { desc = "Previous git hunk" })
+set("n", "<leader>gl", function() require("gitsigns").blame_line() end, { desc = "View git blame" })
+set("n", "<leader>gp", function() require("gitsigns").preview_hunk() end, { desc = "Preview git hunk" })
+set("n", "<leader>gh", function() require("gitsigns").reset_hunk() end, { desc = "Reset git hunk" })
+set("n", "<leader>gr", function() require("gitsigns").reset_buffer() end, { desc = "Reset git buffer" })
+set("n", "<leader>gs", function() require("gitsigns").stage_hunk() end, { desc = "Stage git hunk" })
+set("n", "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, { desc = "Unstage git hunk" })
+set("n", "<leader>gd", function() require("gitsigns").diffthis() end, { desc = "View git diff" })
