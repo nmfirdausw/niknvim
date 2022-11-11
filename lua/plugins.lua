@@ -47,7 +47,7 @@ return {
   },
 
   ["akinsho/toggleterm.nvim"] = {
-    cmd = "ToggleTerm",
+    cmd = { "ToggleTerm", "TermExec" },
     module = { "toggleterm", "toggleterm.terminal" },
     config = function() require "configs.toggleterm" end,
   },
