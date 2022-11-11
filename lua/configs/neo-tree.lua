@@ -9,9 +9,9 @@ neo_tree.setup({
     winbar = true,
     content_layout = "center",
     tab_labels = {
-      filesystem = "" .. " File",
-      buffers = "" .. " Bufs",
-      git_status = "" .. " Git",
+      filesystem = "" .. " File",
+      buffers = "裡" .. " Bufs",
+      git_status = "" .. " Git",
       diagnostics = "裂" .. " Diagnostic",
     },
   },
