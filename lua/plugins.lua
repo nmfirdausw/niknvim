@@ -96,4 +96,8 @@ return {
     keys = { "gc", "gb" },
     config = function() require "configs.comment" end,
   },
+
+  ["neovim/nvim-lspconfig"] = { config = function() require "configs.lspconfig" end },
+
+  ["williamboman/mason.nvim"] = { config = function() require "configs.mason" end },
 }
