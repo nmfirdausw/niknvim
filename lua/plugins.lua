@@ -35,15 +35,15 @@ return {
     config = function() require "configs.bufferline" end,
   },
 
-  ["famiu/bufdelete.nvim"] = { 
-    module = "bufdelete", 
-    cmd = { "Bdelete", "Bwipeout" } 
+  ["famiu/bufdelete.nvim"] = {
+    module = "bufdelete",
+    cmd = { "Bdelete", "Bwipeout" }
   },
 
   ["nvim-telescope/telescope.nvim"] = {
     cmd = "Telescope",
     module = "telescope",
-    config = function() require "configs.telescope" end,
+    config = function() require "configs.telescope_cfg" end,
   },
 
   ["nvim-telescope/telescope-fzf-native.nvim"] = {
@@ -76,7 +76,7 @@ return {
 
   ["lewis6991/gitsigns.nvim"] = {
     event = "BufEnter",
-    config = function() require "configs.gitsigns" end,
+    config = function() require "configs.gitsigns_cfg" end,
   },
 
   ["nvim-treesitter/nvim-treesitter"] = {
@@ -97,7 +97,33 @@ return {
     config = function() require "configs.comment" end,
   },
 
+  ["onsails/lspkind.nvim"] = {
+    module = "lspkind",
+    config = function() require "configs.lspkind" end,
+  },
+
   ["neovim/nvim-lspconfig"] = { config = function() require "configs.lspconfig" end },
 
   ["williamboman/mason.nvim"] = { config = function() require "configs.mason" end },
+
+  ["rafamadriz/friendly-snippets"] = { opt = true },
+
+  ["L3MON4D3/LuaSnip"] = {
+    module = "luasnip",
+    wants = "friendly-snippets",
+    config = function() require "configs.luasnip" end,
+  },
+
+	["hrsh7th/nvim-cmp"] = {
+    event = "InsertEnter",
+    config = function() require "configs.cmp" end,
+  },
+
+  ["saadparwaiz1/cmp_luasnip"] = { after = "nvim-cmp" },
+
+  ["hrsh7th/cmp-buffer"] = { after = "nvim-cmp" },
+
+  ["hrsh7th/cmp-path"] = { after = "nvim-cmp" },
+
+	["hrsh7th/cmp-nvim-lsp"] = { after = "nvim-cmp" },
 }
