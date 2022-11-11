@@ -24,3 +24,7 @@ set("n", "<leader>tg", "<cmd>TermExec cmd='lazygit'<cr>", { desc = "ToggleTerm l
 -- Comment
 set("n", "<leader>/", function() require("Comment.api").toggle.linewise.current() end, { desc = "Comment line" })
 set("v", "<leader>/", "<esc><cmd>lua require('Comment.api').toggle.linewise(vim.fn.visualmode())<cr>", { desc = "Comment line" })
+
+-- Stay in indent mode
+set('v', '<', '<gv', { desc = 'Indent line' })
+set('v', '>', '>gv', { desc = 'Unindent line' })
