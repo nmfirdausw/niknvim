@@ -69,6 +69,11 @@ return {
     config = function() require "configs.indent-blankline" end,
   },
 
+  ["windwp/nvim-autopairs"] = {
+    event = "InsertEnter",
+    config = function() require "configs.autopairs" end,
+  },
+
   ["lewis6991/gitsigns.nvim"] = {
     event = "BufEnter",
     config = function() require "configs.gitsigns" end,

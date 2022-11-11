@@ -4,8 +4,7 @@ local opt = {
 	cmdheight = 0,
 	completeopt = { "menuone", "noselect" },
 	copyindent = true,
-	cursorcolumn = true,
-	cursorline = true,
+	cursorcolumn = true, cursorline = true,
 	expandtab = true,
 	fileencoding = "utf-8",
 	fillchars = { eob = " " },
@@ -36,6 +35,7 @@ local opt = {
 	wrap = false,
 	writebackup = false,
 }
+
 local g = {
   mapleader = " ",
 }
