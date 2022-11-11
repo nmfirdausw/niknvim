@@ -13,7 +13,6 @@ if not bufferline_exists then return end
 bufferline.setup({
   options = {
     offsets = {
-      { filetype = "neo-tree", text = "", padding = 1 },
       { filetype = "Outline", text = "", padding = 1 },
     },
     buffer_close_icon = '',
