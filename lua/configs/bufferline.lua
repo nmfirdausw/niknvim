@@ -1,15 +1,18 @@
 local close_func = function(bufnum)
-  local bufdelete_avail, bufdelete = pcall(require, "bufdelete")
-  if bufdelete_avail then
+  local bufdelete_exists, bufdelete = pcall(require, "bufdelete")
+  if bufdelete_exists then
     bufdelete.bufdelete(bufnum, true)
   else
     vim.cmd["bdelete!"] { args = { bufnum } }
   end
 end
-require("bufferline").setup({
+
+local bufferline_exists, bufferline = pcall(require, "bufferline")
+if not bufferline_exists then return end
+
+bufferline.setup({
   options = {
     offsets = {
-      { filetype = "NvimTree", text = "", padding = 1 },
       { filetype = "neo-tree", text = "", padding = 1 },
       { filetype = "Outline", text = "", padding = 1 },
     },

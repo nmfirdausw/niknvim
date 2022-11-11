@@ -1,4 +1,7 @@
-require("neo-tree").setup({
+local neo_tree_exists, neo_tree = pcall(require, "neo-tree")
+if not neo_tree_exists then return end
+
+neo_tree.setup({
 	close_if_last_window = true,
 	popup_border_style = "single",
 	enable_diagnostics = false,
@@ -44,7 +47,7 @@ require("neo-tree").setup({
     width = 30,
     mappings = {
       o = "open",
-      O = function(state) astronvim.system_open(state.tree:get_node():get_id()) end,
+      O = function(state) system_open(state.tree:get_node():get_id()) end,
       H = "prev_source",
       L = "next_source",
       h = "toggle_hidden",

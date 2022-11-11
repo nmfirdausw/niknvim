@@ -1,4 +1,7 @@
-require("nvim-treesitter.configs").setup({
+local treesitter_exists, treesitter = pcall(require, "nvim-treesitter.config")
+if not treesitter_exists then return end
+
+treesitter.setup({
   ensure_installed = {
 		"lua",
 		"php",

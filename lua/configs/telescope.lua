@@ -1,6 +1,7 @@
-local telescope = require "telescope"
-local actions = require "telescope.actions"
+local telescope_exists, telescope = pcall(require, "telescope")
+if neo_tree_exists then return end
 
+local actions = require "telescope.actions"
 telescope.setup({
   defaults = {
     prompt_prefix = " ",
