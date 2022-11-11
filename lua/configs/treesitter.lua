@@ -4,14 +4,6 @@ if not treesitter_exists then return end
 local treesitter_configs = require "nvim-treesitter.configs"
 
 treesitter_configs.setup({
-  ensure_installed = {
-		"lua",
-		"php",
-		"javascript",
-		"html",
-		"css",
-		"rust",
-	},
   sync_install = false,
   ignore_install = {},
   highlight = {
