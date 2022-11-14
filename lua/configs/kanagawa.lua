@@ -17,7 +17,7 @@ kanagawa.setup({
   terminalColors = true,
   colors = {},
   overrides = {},
-  theme = "default",
+  theme = "light",
   vim.cmd("colorscheme kanagawa"),
 })
 

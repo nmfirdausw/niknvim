@@ -1,5 +1,4 @@
 return {
-
   ["lewis6991/impatient.nvim"] = {},
 
 	["nvim-lua/plenary.nvim"] = { module = "plenary" },
@@ -11,10 +10,20 @@ return {
   	config = function() require "plugins" end,
 	},
 
-  ['rebelot/kanagawa.nvim'] = {
-    as = 'kanagawa',
+  ["rebelot/kanagawa.nvim"] = {
+    as = "kanagawa",
     config = function() require "configs.kanagawa" end,
   },
+
+  -- ["EdenEast/nightfox.nvim"] = {
+  --   as = "nightfox",
+  --   config = function() require "configs.nightfox" end,
+  -- },
+
+  -- ["rose-pine/neovim"] = {
+  --   as = "rose-pine",
+  --   config = function() require "configs.rosepine" end,
+  -- },
 
   ["kyazdani42/nvim-web-devicons"] = {
 		module = "nvim-web-devicons",
@@ -79,6 +88,11 @@ return {
     config = function() require "configs.gitsigns_cfg" end,
   },
 
+  ["rebelot/heirline.nvim"] = { 
+    after = "kanagawa",
+    config = function() require "configs.heirline" end 
+  },
+
   ["nvim-treesitter/nvim-treesitter"] = {
     run = function() require("nvim-treesitter.install").update { with_sync = true } end,
     event = "BufEnter",
@@ -97,6 +111,11 @@ return {
     config = function() require "configs.comment" end,
   },
 
+  ["stevearc/aerial.nvim"] = {
+    module = "aerial",
+    config = function() require "configs.aerial" end,
+  },
+
   ["onsails/lspkind.nvim"] = {
     module = "lspkind",
     config = function() require "configs.lspkind" end,
@@ -105,6 +124,11 @@ return {
   ["neovim/nvim-lspconfig"] = { config = function() require "configs.lspconfig" end },
 
   ["williamboman/mason.nvim"] = { config = function() require "configs.mason" end },
+
+  ["williamboman/mason-lspconfig.nvim"] = {
+    after = { "mason.nvim", "nvim-lspconfig" },
+    config = function() require "configs.mason-lspconfig" end,
+  },
 
   ["rafamadriz/friendly-snippets"] = { opt = true },
 

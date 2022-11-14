@@ -39,3 +39,7 @@ set("n", "<leader>gr", function() require("gitsigns").reset_buffer() end, { desc
 set("n", "<leader>gs", function() require("gitsigns").stage_hunk() end, { desc = "Stage git hunk" })
 set("n", "<leader>gu", function() require("gitsigns").undo_stage_hunk() end, { desc = "Unstage git hunk" })
 set("n", "<leader>gd", function() require("gitsigns").diffthis() end, { desc = "View git diff" })
+
+-- Aerial
+set("n", "<leader>lS", function() require("aerial").toggle() end, { desc = "Symbol outline" })
+

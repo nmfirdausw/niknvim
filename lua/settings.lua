@@ -4,7 +4,8 @@ local opt = {
 	cmdheight = 0,
 	completeopt = { "menuone", "noselect" },
 	copyindent = true,
-	cursorcolumn = true, cursorline = true,
+	cursorcolumn = true,
+	cursorline = true,
 	expandtab = true,
 	fileencoding = "utf-8",
 	fillchars = { eob = " " },
@@ -18,8 +19,7 @@ local opt = {
 	preserveindent = true,
 	pumheight = 10,
 	relativenumber = true,
-	scrolloff = 8,
-	shiftwidth = 2,
+	scrolloff = 8, shiftwidth = 2,
 	showmode = false,
 	sidescrolloff = 8,
 	signcolumn = "yes",
@@ -42,6 +42,9 @@ local g = {
 	mapleader = " ",
 	zipPlugin = false,
 	load_black = false,
+	neovide_scale_factor = 1.2,
+  neovide_fullscreen = true,
+  neovide_cursor_antialiasing = false,
 }
 
 local default_plugins = {

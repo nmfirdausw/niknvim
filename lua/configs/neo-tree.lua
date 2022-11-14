@@ -47,7 +47,6 @@ neo_tree.setup({
     width = 30,
     mappings = {
       o = "open",
-      O = function(state) system_open(state.tree:get_node():get_id()) end,
       H = "prev_source",
       L = "next_source",
       h = "toggle_hidden",
