@@ -150,4 +150,9 @@ return {
   ["hrsh7th/cmp-path"] = { after = "nvim-cmp" },
 
 	["hrsh7th/cmp-nvim-lsp"] = { after = "nvim-cmp" },
+
+	["xiyaowong/nvim-transparent"] = {
+    config = function() require "configs.transparent" end,
+  },
+
 }
