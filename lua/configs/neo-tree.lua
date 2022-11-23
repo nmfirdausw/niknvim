@@ -6,7 +6,7 @@ neo_tree.setup({
 	popup_border_style = "single",
 	enable_diagnostics = false,
   source_selector = {
-    winbar = false,
+    winbar = true,
     content_layout = "center",
     tab_labels = {
       filesystem = "" .. " File",

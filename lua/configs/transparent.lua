@@ -9,6 +9,8 @@ transparent.setup({
     "TelescopeBorder",
     "NeotreeNormal",
     "StatusLine",
+    "Winbar",
+    "WinbarNC",
   },
 
   exclude = {

@@ -87,7 +87,10 @@ return {
     config = function() require "configs.lspkind" end,
   },
 
-  ["neovim/nvim-lspconfig"] = { config = function() require "configs.lspconfig" end },
+  ["neovim/nvim-lspconfig"] = { 
+    after = "nvim-navic",
+    config = function() require "configs.lspconfig" end
+  },
 
   ["williamboman/mason.nvim"] = { config = function() require "configs.mason" end },
 
@@ -129,4 +132,6 @@ return {
   ["j-hui/fidget.nvim"] = {
     config = function() require "configs.fidget" end 
   },
+
+  ["SmiteshP/nvim-navic"] = {},
 }

@@ -1,6 +1,9 @@
 local lspconfig_exists, lspconfig = pcall(require, "lspconfig")
 if not lspconfig_exists then return end
 
+local navic_exists, navic = pcall(require, "nvim-navic")
+if not navic_exists then return end
+
 local sign_define = vim.fn.sign_define
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
@@ -35,6 +38,9 @@ vim.lsp.handlers['textDocument/signatureHelp'] = vim.lsp.with(vim.lsp.handlers.s
 local on_attach = function(client, bufnr)
 	client.server_capabilities.documentFormattingProvider = false
 	client.server_capabilities.documentRangeFormattingProvider = false
+  if client.server_capabilities.documentSymbolProvider then
+      navic.attach(client, bufnr)
+  end
 
 	local bufopts = { noremap=true, silent=true, buffer=bufnr }
   vim.keymap.set('n', 'gD', vim.lsp.buf.declaration, bufopts)
