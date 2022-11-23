@@ -6,7 +6,7 @@ neo_tree.setup({
 	popup_border_style = "single",
 	enable_diagnostics = false,
   source_selector = {
-    winbar = true,
+    winbar = false,
     content_layout = "center",
     tab_labels = {
       filesystem = "" .. " File",
@@ -27,7 +27,7 @@ neo_tree.setup({
 			default = '',
 		},
 		modified = {
-      symbol = '●',
+      symbol = '',
     },
 		git_status = {
 			symbols = {

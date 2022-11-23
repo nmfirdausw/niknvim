@@ -5,31 +5,21 @@ local conditions = require("heirline.conditions")
 local utils = require("heirline.utils")
 
 local colors = {
-  bright_bg = utils.get_highlight("Folded").bg,
-  bright_fg = utils.get_highlight("Folded").fg,
-  red = utils.get_highlight("DiagnosticError").fg,
-  dark_red = utils.get_highlight("DiffDelete").bg,
-  green = utils.get_highlight("String").fg,
-  blue = utils.get_highlight("Function").fg,
-  gray = utils.get_highlight("NonText").fg,
-  orange = utils.get_highlight("Constant").fg,
-  purple = utils.get_highlight("Statement").fg,
-  cyan = utils.get_highlight("Special").fg,
-  diag_warn = utils.get_highlight("DiagnosticWarn").fg,
-  diag_error = utils.get_highlight("DiagnosticError").fg,
-  diag_hint = utils.get_highlight("DiagnosticHint").fg,
-  diag_info = utils.get_highlight("DiagnosticInfo").fg,
-  git_del = utils.get_highlight("diffDeleted").fg,
-  git_add = utils.get_highlight("diffAdded").fg,
-  git_change = utils.get_highlight("diffChanged").fg,
-  default_bg = utils.get_highlight("StatusLine").fg,
+  green = utils.get_highlight("MiniStatuslineModeInsert").bg,
+  cyan = utils.get_highlight("MiniStatuslineModeNormal").bg,
+  blue = utils.get_highlight("MiniStatuslineModeOther").bg,
+  purple = utils.get_highlight("MiniStatuslineModeVisual").bg,
+  orange = utils.get_highlight("MiniStatuslineModeCommand").bg,
+  red = utils.get_highlight("MiniStatuslineModeReplace").bg,
+  modified = "#d7d787",
+  normal_bg = utils.get_highlight("CursorLine").bg,
 }
 
-require('heirline').load_colors(colors)
+heirline.load_colors(colors)
 
 local vimode = {
   init = function(self)
-    self.mode = vim.fn.mode(1)
+    self.mode = vim.fn.mode(1) -- :h mode()
     if not self.once then
       vim.api.nvim_create_autocmd("ModeChanged", {
         pattern = "*:*o",
@@ -38,243 +28,280 @@ local vimode = {
       self.once = true
     end
   end,
-
   static = {
-    mode_names = {
-      n = "N",
-      no = "N?",
-      nov = "N?",
-      noV = "N?",
-      ["no\22"] = "N?",
-      niI = "Ni",
-      niR = "Nr",
-      niV = "Nv",
-      nt = "Nt",
-      v = "V",
-      vs = "Vs",
-      V = "V_",
-      Vs = "Vs",
-      ["\22"] = "^V",
-      ["\22s"] = "^V",
-      s = "S",
-      S = "S_",
-      ["\19"] = "^S",
-      i = "I",
-      ic = "Ic",
-      ix = "Ix",
-      R = "R",
-      Rc = "Rc",
-      Rx = "Rx",
-      Rv = "Rv",
-      Rvc = "Rv",
-      Rvx = "Rv",
-      c = "C",
-      cv = "Ex",
-      r = "...",
-      rm = "M",
-      ["r?"] = "?",
-      ["!"] = "!",
-      t = "T",
-    },
     mode_colors = {
-      n = "green" ,
-      i = "orange",
-      v = "cyan",
-      V =  "cyan",
-      ["\22"] =  "cyan",
+      n = "cyan" ,
+      i = "green",
+      v = "purple",
+      V =  "purple",
+      ["\22"] =  "purple",
       c =  "orange",
       s =  "purple",
       S =  "purple",
       ["\19"] =  "purple",
-      R =  "blue",
-      r =  "blue",
-      ["!"] =  "red",
-      t =  "red",
+      R =  "red",
+      r =  "red",
+      ["!"] =  "blue",
+      t =  "blue",
     }
   },
-
-  provider = "  ",
+  
+  provider = function()
+    return " "
+  end,
   hl = function(self)
-    local mode = self.mode:sub(1, 1)
-    return { fg = colors.red, bg = colors.default_bg }
+    local mode = self.mode:sub(1, 1) -- get only the first mode character
+    return { bg = self.mode_colors[mode], bold = true, }
   end,
   update = {
-    "ModeChanged",
+      "ModeChanged",
   },
 }
 
-local Git = {
-    condition = conditions.is_git_repo,
+local git_branch = {
+  condition = conditions.is_git_repo,
 
-    init = function(self)
-        self.status_dict = vim.b.gitsigns_status_dict
-        self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+  init = function(self)
+    self.status_dict = vim.b.gitsigns_status_dict
+    self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+  end,
+
+  hl = { fg = "orange", bg = "normal_bg" },
+
+  {
+    provider = function(self)
+        return "  " .. self.status_dict.head .. " "
     end,
-
-    hl = { fg = "orange" },
-
-
-    {   -- git branch name
-        provider = function(self)
-            return " " .. self.status_dict.head
-        end,
-        hl = { bold = true }
-    },
-    -- You could handle delimiters, icons and counts similar to Diagnostics
-    {
-        condition = function(self)
-            return self.has_changes
-        end,
-        provider = "("
-    },
-    {
-        provider = function(self)
-            local count = self.status_dict.added or 0
-            return count > 0 and ("+" .. count)
-        end,
-        hl = { fg = "git_add" },
-    },
-    {
-        provider = function(self)
-            local count = self.status_dict.removed or 0
-            return count > 0 and ("-" .. count)
-        end,
-        hl = { fg = "git_del" },
-    },
-    {
-        provider = function(self)
-            local count = self.status_dict.changed or 0
-            return count > 0 and ("~" .. count)
-        end,
-        hl = { fg = "git_change" },
-    },
-    {
-        condition = function(self)
-            return self.has_changes
-        end,
-        provider = ")",
-    },
+    hl = { bold = true }
+  },
 }
 
-local pro2 = {
-  provider = "bright_bg",
-  hl = { fg = colors.bright_fg, bg = colors.bright_bg },
+local file_name_block = {
+  init = function(self)
+    self.filename = vim.api.nvim_buf_get_name(0)
+  end,
+  hl = { bg = "normal_bg" }
 }
 
-local pro3 = {
-  provider = "bright_fg",
-  hl = { fg = colors.dark_red, bg = colors.bright_fg },
-}
-
-local pro4 = {
-  provider = "red",
-  hl = { fg = colors.bright_fg, bg = colors.red },
-}
-
-local pro5 = {
-  provider = "dark_red",
-  hl = { fg = colors.bright_fg, bg = colors.dark_red },
-}
-
-local pro6 = {
-  provider = "green",
-  hl = { fg = colors.dark_red, bg = colors.green },
-}
-
-local pro7 = {
-  provider = "blue",
-  hl = { fg = colors.dark_red, bg = colors.blue },
-}
-
-local pro8 = {
-  provider = "gray",
-  hl = { fg = colors.dark_red, bg = colors.gray },
-}
-
-local pro9 = {
-  provider = "orange",
-  hl = { fg = colors.dark_red, bg = colors.orange },
-}
-
-local pro10 = {
-  provider = "purple",
-  hl = { fg = colors.dark_red, bg = colors.purple },
-}
-
-local pro11 = {
-  provider = "cyan",
-  hl = { fg = colors.dark_red, bg = colors.cyan },
-}
-
-local pro12 = {
-  provider = "diag_warn",
-  hl = { fg = colors.dark_red, bg = colors.diag_warn },
-}
-
-local pro13 = {
-  provider = "diag_hint",
-  hl = { fg = colors.dark_red, bg = colors.diag_hint },
-}
-
-local pro14 = {
-  provider = "diag_info",
-  hl = { fg = colors.dark_red, bg = colors.diag_info },
-}
-
-local pro14 = {
-  provider = "diag_error",
-  hl = { fg = colors.dark_red, bg = colors.diag_error },
-}
-
-local pro15 = {
-  provider = "git_del",
-  hl = { fg = colors.dark_red, bg = colors.git_del },
-}
-
-local pro16 = {
-  provider = "git_add",
-  hl = { fg = colors.dark_red, bg = colors.git_add },
-}
-
-local pro17 = {
-  provider = "git_change",
-  hl = { fg = colors.dark_red, bg = colors.git_change },
-}
-
-local FileFormat = {
-  provider = function()
-    local fmt = vim.bo.fileformat
-    return fmt ~= 'unix' and fmt:upper()
+local file_icon = {
+  init = function(self)
+    local filename = self.filename
+    local extension = vim.fn.fnamemodify(filename, ":e")
+    self.icon, self.icon_color = require("nvim-web-devicons").get_icon_color(filename, extension, { default = true })
+  end,
+  provider = function(self)
+    return " " .. self.icon and (" " .. self.icon .. " ")
+  end,
+  hl = function(self)
+    return { fg = self.icon_color }
   end
 }
-local Ruler = {
-    -- %l = current line number
-    -- %L = number of lines in the buffer
-    -- %c = column number
-    -- %P = percentage through file of displayed window
-    provider = "%7(%l/%3L%):%2c %P",
+
+local file_name = {
+  provider = function(self)
+    local filename = vim.fn.fnamemodify(self.filename, ":.")
+    if filename == "" then return "[No Name]" end
+    if not conditions.width_percent_below(#filename, 0.25) then
+      filename = vim.fn.pathshorten(filename)
+    end
+    return filename .. " "
+  end,
+  hl = { fg = utils.get_highlight("Directory").fg },
 }
 
-local ScrollBar ={
-    static = {
-        sbar = { '▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
-        -- Another variant, because the more choice the better.
-        -- sbar = { '🭶', '🭷', '🭸', '🭹', '🭺', '🭻' }
-    },
-    provider = function(self)
-        local curr_line = vim.api.nvim_win_get_cursor(0)[1]
-        local lines = vim.api.nvim_buf_line_count(0)
-        local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
-        return string.rep(self.sbar[i], 2)
+local file_flags = {
+  {
+    condition = function()
+      return vim.bo.modified
     end,
-    hl = { fg = "blue", bg = "bright_bg" },
+    provider = " ",
+    hl = { fg = "modified" },
+  },
+  {
+    condition = function()
+      return not vim.bo.modifiable or vim.bo.readonly
+    end,
+    provider = "",
+    hl = { fg = "orange" },
+  },
 }
 
-local test = {
-  provider = "Haha",
-  hl = { fg = colors.red, bg = "black" }
+local file_name_modifier = {
+  hl = function()
+    if vim.bo.modified then
+      return { fg = "cyan", bold = true, force=true }
+    end
+  end,
 }
-local statusline = { Git, test, vimode, FileFormat, Ruler,  ScrollBar}
 
-heirline.setup(statusline)
+file_name_block = utils.insert(file_name_block,
+  file_icon,
+  utils.insert(file_name_modifier, file_name),
+  unpack(file_flags),
+  { provider = '%<'}
+)
 
+local space = {
+  provider = " ",
+  hl = { bg = "normal_bg", }
+}
+
+local git_status = {
+  condition = conditions.is_git_repo,
+
+  init = function(self)
+    self.status_dict = vim.b.gitsigns_status_dict
+    self.has_changes = self.status_dict.added ~= 0 or self.status_dict.removed ~= 0 or self.status_dict.changed ~= 0
+  end,
+
+  hl = { fg = "orange", bg = "normal_bg" },
+
+  {
+    provider = function(self)
+      local count = self.status_dict.added or 0
+      return count > 0 and ("  " .. count .. " ")
+    end,
+    hl = { fg = "green" },
+  },
+  {
+      provider = function(self)
+          local count = self.status_dict.removed or 0
+          return count > 0 and ("  " .. count .. " ")
+      end,
+      hl = { fg = "red" },
+  },
+  {
+      provider = function(self)
+          local count = self.status_dict.changed or 0
+          return count > 0 and ("  " .. count .. " ")
+      end,
+      hl = { fg = "orange" },
+  },
+}
+
+local diagnostics = {
+  condition = conditions.has_diagnostics,
+
+  static = {
+    error_icon = vim.fn.sign_getdefined("DiagnosticSignError")[1].text,
+    warn_icon = vim.fn.sign_getdefined("DiagnosticSignWarn")[1].text,
+    info_icon = vim.fn.sign_getdefined("DiagnosticSignInfo")[1].text,
+    hint_icon = vim.fn.sign_getdefined("DiagnosticSignHint")[1].text,
+  },
+
+  init = function(self)
+    self.errors = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.ERROR })
+    self.warnings = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.WARN })
+    self.hints = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.HINT })
+    self.info = #vim.diagnostic.get(0, { severity = vim.diagnostic.severity.INFO })
+  end,
+
+  update = { "DiagnosticChanged", "BufEnter" },
+
+  {
+    provider = function(self)
+      return self.errors > 0 and (" " .. self.error_icon .. self.errors .. " ")
+    end,
+    hl = { fg = "red" },
+  },
+  {
+    provider = function(self)
+      return self.warnings > 0 and (" " .. self.warn_icon .. self.warnings .. " ")
+    end,
+    hl = { fg = "orange" },
+  },
+  {
+    provider = function(self)
+      return self.info > 0 and (" " .. self.info_icon .. self.info .. " ")
+    end,
+    hl = { fg = "blue" },
+  },
+  {
+    provider = function(self, sd)
+      return self.hints > 0 and (" " .. self.hint_icon .. self.hints .. " ")
+    end,
+    hl = { fg = "green" },
+  },
+
+  hl = { bg = "normal_bg" }
+}
+
+local align = { provider = "%=" }
+
+local scroll_bar ={
+  static = {
+    sbar = { ' ','▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+  },
+  provider = function(self)
+    local curr_line = vim.api.nvim_win_get_cursor(0)[1]
+    local lines = vim.api.nvim_buf_line_count(0)
+    local i = math.floor((curr_line - 1) / lines * #self.sbar) + 1
+    return string.rep(self.sbar[i], 2)
+  end,
+  hl = { fg = "orange", bg = "blue" },
+}
+
+local lsp_active = {
+  condition = conditions.lsp_attached,
+  update = {'LspAttach', 'LspDetach'},
+  {
+    provider = " ",
+    hl = { bg = "normal_bg" }
+  },
+  {
+    provider  = function()
+      local names = {}
+      for _, server in pairs(vim.lsp.buf_get_clients(0)) do
+        table.insert(names, server.name)
+      end
+      return table.concat(names, " ")
+    end,
+    hl = { fg = "green", bold = true, bg = "normal_bg" },
+  },
+  {
+    provider = " ",
+    hl = { bg = "normal_bg" }
+  },
+}
+
+local ruler = {
+    provider = " " .. "%7(%l/%3L%):%2c %P",
+    hl = { fg = "cyan", bg = "normal_bg" }
+}
+
+local terminal_name = {
+    provider = function()
+        local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
+        return " " .. tname
+    end,
+    hl = { fg = "blue", bold = true },
+}
+
+local file_type = {
+  provider = function()
+    return string.upper(vim.bo.filetype)
+  end,
+  hl = { fg = utils.get_highlight("Type").fg, bold = true },
+}
+
+local terminal_status_line = {
+  condition = function()
+      return conditions.buffer_matches({ buftype = { "terminal" } })
+  end,
+
+  hl = { bg = "normal_bg" },
+
+  { condition = conditions.is_active, vimode, space }, file_type, space, terminal_name, align,
+}
+
+local default_statusline = {
+  condition = function()
+    return not conditions.buffer_matches({ buftype = { "terminal" } })
+  end,
+  vimode, git_branch, file_name_block, git_status, diagnostics, vimode, align,
+  vimode, space, lsp_active, ruler, space, scroll_bar,space, vimode
+}
+
+local status_line = { terminal_status_line, default_statusline }
+
+heirline.setup(status_line)

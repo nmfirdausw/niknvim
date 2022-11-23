@@ -1,7 +1,6 @@
 return {
   ["lewis6991/impatient.nvim"] = {},
-
-	["nvim-lua/plenary.nvim"] = { module = "plenary" },
+["nvim-lua/plenary.nvim"] = { module = "plenary" },
 
   ["MunifTanjim/nui.nvim"] = { module = "nui" },
 
@@ -10,20 +9,10 @@ return {
   	config = function() require "plugins" end,
 	},
 
-  ["rebelot/kanagawa.nvim"] = {
-    as = "kanagawa",
-    config = function() require "configs.kanagawa" end,
+  ["EdenEast/nightfox.nvim"] = {
+    as = "nightfox",
+    config = function() require "configs.nightfox" end,
   },
-
-  -- ["EdenEast/nightfox.nvim"] = {
-  --   as = "nightfox",
-  --   config = function() require "configs.nightfox" end,
-  -- },
-
-  -- ["rose-pine/neovim"] = {
-  --   as = "rose-pine",
-  --   config = function() require "configs.rosepine" end,
-  -- },
 
   ["kyazdani42/nvim-web-devicons"] = {
 		module = "nvim-web-devicons",
@@ -38,12 +27,6 @@ return {
 		config = function() require "configs.neo-tree" end,
   },
 
-  ["akinsho/bufferline.nvim"] = {
-    module = "bufferline",
-    event = "UIEnter",
-    config = function() require "configs.bufferline" end,
-  },
-
   ["famiu/bufdelete.nvim"] = {
     module = "bufdelete",
     cmd = { "Bdelete", "Bwipeout" }
@@ -53,13 +36,6 @@ return {
     cmd = "Telescope",
     module = "telescope",
     config = function() require "configs.telescope_cfg" end,
-  },
-
-  ["nvim-telescope/telescope-fzf-native.nvim"] = {
-    after = "telescope.nvim",
-    disable = vim.fn.executable "make" == 0,
-    run = "make",
-    config = function() require("telescope").load_extension "fzf" end,
   },
 
   ["akinsho/toggleterm.nvim"] = {
@@ -88,11 +64,6 @@ return {
     config = function() require "configs.gitsigns_cfg" end,
   },
 
-  ["rebelot/heirline.nvim"] = { 
-    after = "kanagawa",
-    config = function() require "configs.heirline" end 
-  },
-
   ["nvim-treesitter/nvim-treesitter"] = {
     run = function() require("nvim-treesitter.install").update { with_sync = true } end,
     event = "BufEnter",
@@ -109,11 +80,6 @@ return {
     module = { "Comment", "Comment.api" },
     keys = { "gc", "gb" },
     config = function() require "configs.comment" end,
-  },
-
-  ["stevearc/aerial.nvim"] = {
-    module = "aerial",
-    config = function() require "configs.aerial" end,
   },
 
   ["onsails/lspkind.nvim"] = {
@@ -155,4 +121,12 @@ return {
     config = function() require "configs.transparent" end,
   },
 
+  ["rebelot/heirline.nvim"] = {
+    after = "nightfox",
+    config = function() require "configs.heirline" end 
+  },
+
+  ["j-hui/fidget.nvim"] = {
+    config = function() require "configs.fidget" end 
+  },
 }

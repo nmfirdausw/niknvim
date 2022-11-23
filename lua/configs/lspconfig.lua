@@ -5,7 +5,7 @@ local sign_define = vim.fn.sign_define
 local signs = {
   { name = 'DiagnosticSignError', text = '' },
   { name = 'DiagnosticSignWarn', text = '' },
-  { name = 'DiagnosticSignHint', text = '' },
+  { name = 'DiagnosticSignHint', text = '' },
   { name = 'DiagnosticSignInfo', text = '' },
 }
 

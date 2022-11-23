@@ -32,7 +32,11 @@ nightfox.setup({
   },
   palettes = {},
   specs = {},
-  groups = {},
+  groups = {
+    all = {
+      StatusLine = { fg = "#ffffff", bg = "#254147" }, -- Non-current windows
+    },
+  },
 })
 
 -- setup must be called before loading
