@@ -265,33 +265,32 @@ local lsp_active = {
 }
 
 local ruler = {
-    provider = " " .. "%7(%l/%3L%):%2c %P",
-    hl = { fg = "cyan", bg = "normal_bg" }
+  provider = " " .. "%7(%l/%3L%):%2c %P",
+  hl = { fg = "cyan", bg = "normal_bg" }
 }
 
 local terminal_name = {
-    provider = function()
-        local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
-        return " " .. tname
-    end,
-    hl = { fg = "blue", bold = true },
+  provider = function()
+    local tname, _ = vim.api.nvim_buf_get_name(0):gsub(".*:", "")
+    return " " .. tname .. " "
+  end,
+  hl = { fg = "blue", bold = true, bg = "normal_bg" },
 }
 
 local file_type = {
   provider = function()
     return string.upper(vim.bo.filetype)
   end,
-  hl = { fg = utils.get_highlight("Type").fg, bold = true },
+  hl = { fg = utils.get_highlight("Type").fg, bold = true, bg = "normal_bg" },
 }
 
 local terminal_status_line = {
   condition = function()
-      return conditions.buffer_matches({ buftype = { "terminal" } })
+    return conditions.buffer_matches({ buftype = { "terminal" } })
   end,
 
-  hl = { bg = "normal_bg" },
-
-  { condition = conditions.is_active, vimode, space }, file_type, space, terminal_name, align,
+  vimode, space, file_type, space, terminal_name, vimode, align, 
+  vimode, space, ruler, space, scroll_bar,space, vimode
 }
 
 local default_statusline = {
