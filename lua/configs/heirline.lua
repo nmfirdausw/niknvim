@@ -217,7 +217,7 @@ local diagnostics = {
     hl = { fg = "blue" },
   },
   {
-    provider = function(self, sd)
+    provider = function(self)
       return self.hints > 0 and (" " .. self.hint_icon .. self.hints .. " ")
     end,
     hl = { fg = "green" },
@@ -230,7 +230,7 @@ local align = { provider = "%=" }
 
 local scroll_bar ={
   static = {
-    sbar = { ' ','▁', '▂', '▃', '▄', '▅', '▆', '▇', '█' }
+    sbar = { '█', '▇', '▆', '▅', '▄', '▃', '▂', '▁', ' ' }
   },
   provider = function(self)
     local curr_line = vim.api.nvim_win_get_cursor(0)[1]
@@ -383,7 +383,20 @@ local default_statusline = {
   vimode, space, lsp_active, ruler, space, scroll_bar,space, vimode
 }
 
-local winbar = { navic_bar }
+local winbar = {
+  {
+    condition = function()
+      return conditions.buffer_matches({
+        buftype = { "nofile", "prompt", "help", "quickfix", "terminal" },
+        filetype = { "^git.*", "fugitive" },
+      })
+    end,
+    init = function()
+        vim.opt_local.winbar = nil
+    end
+  },
+  navic_bar
+}
 
 local status_line = { terminal_status_line, default_statusline }
 

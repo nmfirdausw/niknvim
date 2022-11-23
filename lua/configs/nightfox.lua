@@ -34,7 +34,11 @@ nightfox.setup({
   specs = {},
   groups = {
     all = {
-      StatusLine = { fg = "#ffffff", bg = "#254147" }, -- Non-current windows
+      StatusLine = { fg = "#ffffff", bg = "#254147" },
+      NeoTreeTabActive = { fg = "#fda47f", bg = "#254147" },
+      NeoTreeTabInactive = { fg = "#ffffff", bg = "#254147" },
+      NeoTreeTabSeparatorInactive = { fg = "#254147", bg = "#254147" },
+      NeoTreeTabSeparatorActive = { fg = "#254147", bg = "#254147" },
     },
   },
 })
