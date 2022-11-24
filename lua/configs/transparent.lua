@@ -11,6 +11,7 @@ transparent.setup({
     "StatusLine",
     "Winbar",
     "WinbarNC",
+    "NormalFloat",
   },
 
   exclude = {

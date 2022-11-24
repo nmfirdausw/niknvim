@@ -34,14 +34,20 @@ nightfox.setup({
   specs = {},
   groups = {
     all = {
-      StatusLine = { fg = "#ffffff", bg = "#254147" },
-      NeoTreeTabActive = { fg = "#fda47f", bg = "#254147" },
-      NeoTreeTabInactive = { fg = "#ffffff", bg = "#254147" },
-      NeoTreeTabSeparatorInactive = { fg = "#254147", bg = "#254147" },
-      NeoTreeTabSeparatorActive = { fg = "#254147", bg = "#254147" },
+      -- StatusLine = { fg = "#ffffff", bg = "#254147" },
+      -- NeoTreeTabActive = { fg = "#fda47f", bg = "#254147" },
+      -- NeoTreeTabInactive = { fg = "#ffffff", bg = "#254147" },
+      -- NeoTreeTabSeparatorInactive = { fg = "#254147", bg = "#254147" },
+      -- NeoTreeTabSeparatorActive = { fg = "#254147", bg = "#254147" },
+
+      StatusLine = { fg = "#ffffff", bg = "#444c5e" },
+      NeoTreeTabActive = { fg = "#ebcb8b", bg = "#444c5e" },
+      NeoTreeTabInactive = { fg = "#ffffff", bg = "#444c5e" },
+      NeoTreeTabSeparatorInactive = { fg = "#444c5e", bg = "#444c5e" },
+      NeoTreeTabSeparatorActive = { fg = "#444c5e", bg = "#444c5e" },
     },
   },
 })
 
 -- setup must be called before loading
-vim.cmd("colorscheme terafox")
+vim.cmd("colorscheme nordfox")

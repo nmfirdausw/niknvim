@@ -126,11 +126,11 @@ return {
 
   ["rebelot/heirline.nvim"] = {
     after = "nightfox",
-    config = function() require "configs.heirline" end 
+    config = function() require "configs.heirline" end
   },
 
   ["j-hui/fidget.nvim"] = {
-    config = function() require "configs.fidget" end 
+    config = function() require "configs.fidget" end
   },
 
   ["SmiteshP/nvim-navic"] = {},
