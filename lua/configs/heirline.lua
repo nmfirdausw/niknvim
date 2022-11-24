@@ -80,7 +80,14 @@ local file_name_block = {
   init = function(self)
     self.filename = vim.api.nvim_buf_get_name(0)
   end,
-  hl = { bg = "normal_bg" }
+  hl = { bg = "normal_bg" },
+}
+
+local file_name_block_for_winbar = {
+  init = function(self)
+    self.filename = vim.api.nvim_buf_get_name(0)
+  end,
+  hl = { fg = "white" },
 }
 
 local file_icon = {
@@ -97,7 +104,23 @@ local file_icon = {
   end
 }
 
+local function get_file_name(file)
+  return file:match("^.+/(.+)$")
+end
+
 local file_name = {
+  provider = function(self)
+    local filename = vim.fn.fnamemodify(self.filename, ":.")
+    if filename == "" then return "[No Name]" end
+    if string.find(filename, "/") then
+      filename = get_file_name(filename)
+    end
+    return filename .. " "
+  end,
+  hl = { fg = utils.get_highlight("Directory").fg },
+}
+
+local winbar_file_name = {
   provider = function(self)
     local filename = vim.fn.fnamemodify(self.filename, ":.")
     if filename == "" then return "[No Name]" end
@@ -106,7 +129,7 @@ local file_name = {
     end
     return filename .. " "
   end,
-  hl = { fg = utils.get_highlight("Directory").fg },
+  hl = { fg = "white" },
 }
 
 local file_flags = {
@@ -134,9 +157,25 @@ local file_name_modifier = {
   end,
 }
 
-file_name_block = utils.insert(file_name_block,
+local winbar_file_name_modifier = {
+  hl = function()
+    if vim.bo.modified then
+      return { fg = "white", bold = true, force=true }
+    end
+  end,
+}
+
+local statusline_file_name_block = utils.insert(file_name_block,
   file_icon,
   utils.insert(file_name_modifier, file_name),
+  unpack(file_flags),
+  { provider = '%<'}
+)
+
+
+local winbar_file_name_block = utils.insert(file_name_block_for_winbar,
+  file_icon,
+  utils.insert(winbar_file_name_modifier, winbar_file_name),
   unpack(file_flags),
   { provider = '%<'}
 )
@@ -379,7 +418,7 @@ local default_statusline = {
   condition = function()
     return not conditions.buffer_matches({ buftype = { "terminal" } })
   end,
-  vimode, git_branch, file_name_block, git_status, diagnostics, vimode, align,
+  vimode, git_branch, statusline_file_name_block, git_status, diagnostics, vimode, align,
   vimode, space, lsp_active, ruler, space, scroll_bar,space, vimode
 }
 
@@ -395,7 +434,7 @@ local winbar = {
         vim.opt_local.winbar = nil
     end
   },
-  navic_bar
+  { navic_bar, align, winbar_file_name_block }
 }
 
 local status_line = { terminal_status_line, default_statusline }
