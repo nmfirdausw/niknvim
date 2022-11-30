@@ -45,6 +45,7 @@ local g = {
 	neovide_scale_factor = 1.2,
   neovide_fullscreen = true,
   neovide_cursor_antialiasing = false,
+  copilot_no_tab_map = true,
 }
 
 local default_plugins = {

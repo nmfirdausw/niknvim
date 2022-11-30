@@ -43,3 +43,11 @@ set("n", "<leader>gd", function() require("gitsigns").diffthis() end, { desc = "
 -- Aerial
 set("n", "<leader>lS", function() require("aerial").toggle() end, { desc = "Symbol outline" })
 
+-- Copilot
+set("i", "<C-c>", "copilot#Accept('<CR>')", { expr=true, silent=true, desc = "Copilot accept suggestion" })
+set("i", "<Plug>(vimrc:copilot-dummy-map)", 'copilot#Accept("")', { silent = true, expr = true, desc = "Copilot dummy accept" })
+
+-- Pest
+set("n", "<leader>pm", function() require("neotest").run.run() end, { desc = "Test Method" })
+set("n", "<leader>pf", function() require("neotest").run.run(vim.fn.expand('%')) end, { desc = "Test File" })
+set("n", "<leader>ps", function() require("neotest").run.run({ suite = true }) end, { desc = "Test Suite" })

@@ -1,6 +1,7 @@
 return {
   ["lewis6991/impatient.nvim"] = {},
-["nvim-lua/plenary.nvim"] = { module = "plenary" },
+
+  ["nvim-lua/plenary.nvim"] = { module = "plenary" },
 
   ["MunifTanjim/nui.nvim"] = { module = "nui" },
 
@@ -87,7 +88,7 @@ return {
     config = function() require "configs.lspkind" end,
   },
 
-  ["neovim/nvim-lspconfig"] = { 
+  ["neovim/nvim-lspconfig"] = {
     after = "nvim-navic",
     config = function() require "configs.lspconfig" end
   },
@@ -134,4 +135,10 @@ return {
   },
 
   ["SmiteshP/nvim-navic"] = {},
+
+  ['nvim-neotest/neotest'] = {
+    requires = { 'theutz/neotest-pest' },
+    after = "heirline.nvim",
+    config = function() require "configs.neotest-pest" end
+  },
 }

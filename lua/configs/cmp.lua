@@ -5,6 +5,9 @@ local luasnip_exists, luasnip = pcall(require, "luasnip")
 local lspkind_exists, lspkind = pcall(require, "lspkind")
 if not luasnip_exists then return end
 
+cmp.setup {
+}
+
 local lspkind_icon = {
   symbol_map = {
     Text = "",
@@ -80,6 +83,9 @@ setup({
 		{ name = 'cmdline' },
 	},
   mapping = {
+    ['<C-;>'] = cmp.mapping(function(fallback)
+      vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
+    end),
     ["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },
     ["<Down>"] = cmp.mapping.select_next_item { behavior = cmp.SelectBehavior.Select },
     ["<C-p>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Insert },
