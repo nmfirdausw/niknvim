@@ -83,7 +83,7 @@ setup({
 		{ name = 'cmdline' },
 	},
   mapping = {
-    ['<C-;>'] = cmp.mapping(function(fallback)
+    ['<C-g>'] = cmp.mapping(function(fallback)
       vim.api.nvim_feedkeys(vim.fn['copilot#Accept'](vim.api.nvim_replace_termcodes('<Tab>', true, true, true)), 'n', true)
     end),
     ["<Up>"] = cmp.mapping.select_prev_item { behavior = cmp.SelectBehavior.Select },

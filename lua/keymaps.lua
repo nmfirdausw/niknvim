@@ -44,7 +44,6 @@ set("n", "<leader>gd", function() require("gitsigns").diffthis() end, { desc = "
 set("n", "<leader>lS", function() require("aerial").toggle() end, { desc = "Symbol outline" })
 
 -- Copilot
-set("i", "<C-c>", "copilot#Accept('<CR>')", { expr=true, silent=true, desc = "Copilot accept suggestion" })
 set("i", "<Plug>(vimrc:copilot-dummy-map)", 'copilot#Accept("")', { silent = true, expr = true, desc = "Copilot dummy accept" })
 
 -- Pest

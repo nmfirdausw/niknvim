@@ -141,4 +141,5 @@ lspconfig.intelephense.setup {
 
 lspconfig.tailwindcss.setup {}
 
-lspconfig.tailwindcss.setup {}
+lspconfig.tsserver.setup{}
+
